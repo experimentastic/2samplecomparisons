@@ -42,7 +42,7 @@ Languages:
         - name: <i class='fas fa-fw fa-bullhorn'></i> Credits
           url: /credits
           weight: 30
-    title: Documentation for Hugo Learn Theme
+    title: Tutorial for the twin page: "2 samples comparison""
     weight: 1
   fr:
     landingPageName: <i class='fas fa-home'></i> Accueil
