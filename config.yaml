@@ -1,4 +1,4 @@
-baseURL: /
+baseURL: "https://2samplescomparisontutorial.netlify.app/"
 languageCode: en-US
 defaultContentLanguage: en
 title: Hugo Learn Documentation
