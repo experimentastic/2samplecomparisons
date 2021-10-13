@@ -1,0 +1,28 @@
+---
+title: 'An example data set'
+author: ''
+date: '2021-10-13'
+slug: []
+categories: []
+tags: []
+weight: 5
+bibliography: references.bib
+---
+
+We will use a small subset of a publicly available dataset for demonstration purposes. The data are the results of an experiment in which participants made decisions and with and without time pressure [@KSTX:2019]. In the Web Appendix to the article the authors explore the possibility of gender effects for several variables. We will focus on how many seconds participants took to make decisions, with and without time pressure.   
+
+```{r, echo = FALSE, include= FALSE}
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE)
+library(haven)
+library(here)
+
+library(tidyverse)
+```
+
+```{r}
+RTPWA<-read_dta(here("content/basics/Data/Replication_WebAppendix.dta"))
+SampleDat<-RTPWA%>%select(female, TimeNTP)
+```
+
+
+The original data are available [here](https://heidata.uni-heidelberg.de/dataset.xhtml?persistentId=doi:10.11588/data/GBKK4O)

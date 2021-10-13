@@ -1,0 +1,151 @@
+---
+title: 'Data Overview'
+author: ''
+date: ''
+slug: []
+categories: []
+tags: []
+weight: 5
+bibliography: references.bib
+#runtime: shiny
+#output: html_document
+---
+
+Here is a plot of the data we will use in this example. It is the number of seconds that participants spent when there was no time pressure. 
+
+<!-- You can use the slider below the plot to change the number of bins in the histogram. -->
+
+```{r, echo = FALSE, include= FALSE}
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE)
+library(haven)
+library(here)
+
+library(tidyverse)
+# library(plotly)
+# library(dash)
+# library(dashCoreComponents)
+# library(dashHtmlComponents)
+```
+
+```{r}
+RTPWA<-read_dta(here("content/basics/Data/Replication_WebAppendix.dta"))
+SampleDat<-RTPWA%>%select(female, TimeNTP,TimeTP)
+
+Samplelong<-SampleDat%>%
+                   mutate(female=as_factor(female))%>%
+                  pivot_longer(names_to="Pressure", values_to="Seconds", TimeTP:TimeNTP)
+```
+
+<!-- <iframe height="800" width="100%" frameborder="no" src="https://interactivedesigns.shinyapps.io/TwoSampleComparison/"> </iframe> -->
+
+```{r, fig.cap="Seconds to decide without time pressure"}
+
+## To do this, need to publish separate shiny apps and then include then in the site...
+## knitr::include_app()
+
+library(shiny)
+library(shinycssloaders)
+
+# shinyApp(
+#   
+#   ui = fluidPage(
+#     title ="",
+#     plotOutput("InputHist1")%>%withSpinner(),
+#     
+#     sliderInput("bins1","Number of bins:",
+#                                   min = 1,
+#                                   max = 50,
+#                                   value = 30, 
+#                 width = '100%')
+#     
+#   ),
+# 
+# 
+# server= function(input, output){
+# 
+# 
+# output$InputHist1 <- renderPlot({
+      
+      
+  
+      Samplelong_NTP<-Samplelong%>%filter(Pressure=="TimeNTP")
+      
+      xmin = min(Samplelong$Seconds)-5
+      xmax = max(Samplelong$Seconds)+5
+    
+      #bins <- seq(min(Samplelong_NTP$Seconds), max(Samplelong_NTP$Seconds), length.out = input$bins1 + 1)
+      
+      bins = seq(min(Samplelong$Seconds), max(Samplelong$Seconds), length.out = 15 + 1)
+      # draw the histogram with the specified number of bins
+      
+      ggplot(Samplelong_NTP, aes(x = Seconds, group = female, col = female, fill = female))+
+        geom_histogram(aes(y=..density..),alpha=0.4, position="identity", breaks = bins)+
+        # geom_density(kernel="epanechnikov", adjust = input$bw1)+
+        #geom_vline(xintercept = mean(Sample$Value), lty = 3, col="black")+
+        theme_minimal()+
+        coord_cartesian(xlim=c(xmin,xmax))+
+        scale_fill_viridis_d()+
+        scale_color_viridis_d()+
+        ggtitle("No time pressure")
+#     })
+# },
+# 
+# options= list(height = 500)
+# )
+
+```
+
+Here is a second plot of data for the same participants when they were under time pressure:
+
+```{r, fig.cap="Seconds to decide under time pressure"}
+# library(shiny)
+# library(shinycssloaders)
+# 
+# shinyApp(
+#   
+#   ui = fluidPage(
+#     title ="",
+#     plotOutput("InputHist1")%>%withSpinner(),
+#     
+#     sliderInput("bins2","Number of bins:",
+#                                   min = 1,
+#                                   max = 50,
+#                                   value = 30, 
+#                 width = '100%')
+#     
+#   ),
+# 
+# 
+# server= function(input, output){
+
+
+# output$InputHist1 <- renderPlot({
+      
+  
+      Samplelong_TP<-Samplelong%>%filter(Pressure=="TimeTP")
+      
+      xmin = min(Samplelong$Seconds)-5
+      xmax = max(Samplelong$Seconds)+5
+    
+      #bins <- seq(min(Samplelong_TP$Seconds), max(Samplelong_TP$Seconds), length.out = input$bins2 + 1)
+      
+      bins = seq(min(Samplelong$Seconds), max(Samplelong$Seconds), length.out = 15 + 1)
+      # draw the histogram with the specified number of bins
+      
+      ggplot(Samplelong_TP, aes(x = Seconds, group = female, col = female, fill = female))+
+        geom_histogram(aes(y=..density..),alpha=0.4, position="identity", breaks = bins)+
+        # geom_density(kernel="epanechnikov", adjust = input$bw1)+
+        #geom_vline(xintercept = mean(Sample$Value), lty = 3, col="black")+
+        theme_minimal()+
+        coord_cartesian(xlim=c(xmin,xmax))+
+        scale_fill_viridis_d()+
+        scale_color_viridis_d()+
+        ggtitle("With time pressure")
+#     })
+# },
+# 
+# options= list(height = 500)
+# )
+
+```
+

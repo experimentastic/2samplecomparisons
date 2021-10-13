@@ -1,12 +1,22 @@
 ---
 chapter: true
 pre: <b>1. </b>
-title: Basics
+title: Data
 weight: 5
 ---
 
-### Chapter 1
+### Part 1
 
-# Basics
+# Two Samples
 
-Discover what this Hugo theme is all about and the core-concepts behind it.
+If we have data that have a natural grouping, we would often like to know if the groups are different (or *similar*).
+
+This tutorial walks through four ways we can assess similarities and differences between two groups: 
+
+1. The t-test
+2. Effect size
+3. Index of Similarity
+4. Probability
+
+
+

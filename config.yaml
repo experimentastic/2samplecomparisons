@@ -2,7 +2,9 @@ baseURL: "https://2samplescomparisontutorial.netlify.app/"
 languageCode: en-US
 defaultContentLanguage: en
 title: Hugo Learn Documentation
-theme: hugo-theme-learn
+theme: 
+  - hugo-theme-learn
+  - hugo-cite
 metaDataFormat: yaml
 defaultContentLanguageInSubdir: yes
 params:
