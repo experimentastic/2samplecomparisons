@@ -1,0 +1,47 @@
+---
+title: t-test 3
+author: ''
+date: '2021-11-15'
+slug: []
+categories: []
+tags: []
+weight: 8
+---
+
+The t-test statistic combines elements from our sample: our sample means ($\hat{\mu}_m$, $\hat{\mu}_f$), the standard deviations, and the number of observations in each sample. 
+
+In this case the test statistic is the ratio of the difference in our sample means to the square root of the sum of the standard deviations for each sample.
+
+$$
+t = \frac{\hat{\mu}_m - \hat{\mu}_f}{\sqrt{\frac{(n_m - 1)\hat{\sigma}_m^2 + (n_f -1)\hat{\sigma}^2_f}{n_m+n_f-2}}}
+$$
+
+```{r, echo = FALSE, include= FALSE}
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE)
+library(haven)
+library(here)
+library(knitr)
+library(kableExtra)
+
+library(tidyverse)
+```
+
+```{r, echo = F}
+RTPWA<-read_dta(here("content/basics/Data/Replication_WebAppendix.dta"))
+SampleDat<-RTPWA%>%select(female, TimeNTP)%>%
+              mutate(female = as_factor(female))
+
+SampleDat2<-RTPWA%>%select(female, TimeTP)%>%
+              mutate(female = as_factor(female))
+
+
+# t.test(SampleDat[SampleDat$female==0,]$TimeNTP, SampleDat[SampleDat$female==1,]$TimeNTP)
+
+v.testTP<-var.test(SampleDat2[SampleDat2$female==0,]$TimeTP, SampleDat2[SampleDat2$female==1,]$TimeTP)
+
+t.testTP<-t.test(SampleDat2[SampleDat2$female==0,]$TimeTP, SampleDat2[SampleDat2$female==1,]$TimeTP, 
+                 var.equal = TRUE)
+```
+
+
+There are other variations to this t-test^[This particular t-test takes as given that the variance in decisions are the same for males and females. We have evidence to support the assumption of equal variance this in this case ($p$- value of an F-test `r v.testTP$p.value`). ]. 

@@ -1,0 +1,58 @@
+---
+title: t-test 1
+author: ''
+date: '2021-11-15'
+slug: []
+categories: []
+tags: []
+weight: 6
+---
+
+Let's take a closer look at the data collected *with*  time pressure.
+
+Is there a difference between the decision times of the male and female participants under pressure? 
+
+```{r, echo = FALSE, include= FALSE}
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE)
+library(haven)
+library(here)
+library(knitr)
+library(kableExtra)
+
+library(tidyverse)
+```
+
+```{r}
+RTPWA<-read_dta(here("content/basics/Data/Replication_WebAppendix.dta"))
+SampleDat<-RTPWA%>%select(female, TimeNTP)%>%
+              mutate(female = as_factor(female))
+
+SampleDat2<-RTPWA%>%select(female, TimeTP)%>%
+              mutate(female = as_factor(female))
+
+
+
+ggplot(data = SampleDat2, aes(TimeTP,group = female,fill = female))+
+          geom_histogram( alpha = 0.6)+
+          scale_fill_viridis_d()+
+          xlab("Seconds to Decide")+
+          #coord_cartesian(xlim = c(min(data$TimeTP, data$TimeNTP), max(data$TimeTP, data$TimeNTP)))+
+          theme_bw()+
+          ggtitle("Decision Times: No Time Pressure")
+```
+
+If we look at the average decision times for males and females, we get and idea of the central tendency.
+
+```{r}
+SampleDat2%>%
+  group_by(female)%>%
+  summarise('Average Decision Time' = mean(TimeTP))%>%
+  kable(caption="Average decision times for males and females", digits = 2)%>%
+  kable_styling(bootstrap_options="striped", full_width = F)
+```
+
+If we just look at the averages, we might be tempted to say that they are different. But the averages alone do not take into account the way that the data are *distributed*, so we don't really know *how* different.
+
+
+To decide whether or not these averages are different, one technique is the classic 'Student's t-test,' which we will explore on the next page.
+

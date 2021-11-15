@@ -1,0 +1,30 @@
+---
+title: t-test 2
+author: ''
+date: '2021-11-15'
+slug: []
+categories: []
+tags: []
+weight: 7
+mathjax: true
+---
+
+
+Student's t-test is a technique for assessing a specific *hypothesis*. In this case: *are the population average decisions times of males different from the population average decision times of females?* 
+
+Let's call the population average decision times of males $\mu_m$, and the population average decision times of females $\mu_f$. 
+
+Our *null* hypothesis is that there is **no difference** between these population averages, so
+
+$$
+H_0: \mu_m - \mu_f = 0
+$$
+
+The *alternative* hypothesis is what must be true if the null is not true. For us, this is:
+
+$$
+H_1: \mu_m - \mu_f \neq 0
+$$
+
+Notice that we make a hypothesis about the **population**. We don't know what the population actually is, and all we have is a **sample**. The t-test uses that sample data in order to draw inference about the population.
+

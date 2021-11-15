@@ -1,0 +1,25 @@
+---
+title: t-test 3
+author: ''
+date: '2021-11-15'
+slug: []
+categories: []
+tags: []
+weight: 8
+---
+
+<script src="{{< blogdown/postref >}}index.en_files/header-attrs/header-attrs.js"></script>
+
+
+<p>The t-test statistic combines elements from our sample: our sample means, the standard deviations, and the number of observations in each sample.</p>
+<p>In this case the test statistic is the ratio of the difference in our sample means to the square root of the sum of the standard deviations for each sample.</p>
+<p><span class="math display">\[
+t = \frac{\hat{\mu}_m - \hat{\mu}_f}{\sqrt{\frac{\hat{\sigma}^2}{n_m}+ \frac{\hat{\sigma}^2}{n_f}}}
+\]</span></p>
+<p>There are other variations to this t-test<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>This particular t-test takes as given that the variance in decisions are the same for males and females. We have evidence to support this in this case (<span class="math inline">\(p\)</span>- value of an F-test 0.9653524). <a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>

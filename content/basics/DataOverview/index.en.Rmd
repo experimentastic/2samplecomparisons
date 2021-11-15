@@ -27,7 +27,7 @@ function autoResize(iframe) {
 </script>
 
 
-Here is are two histograms of the data we will use in this example. Each plot summarises the number of seconds that participants spent deciding. The first plot shows the case when there was no time pressure and the second shows when participants were under time pressure. 
+Here are two histograms of the data we will use in this example. Each plot summarises the number of seconds that male and female participants spent deciding. The first plot shows the case when there was no time pressure and the second shows when participants were under time pressure. 
 
 You can move the sliders to explore what happens when the number of bins changes.(*Takes a few seconds to load*)
 
