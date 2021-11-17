@@ -11,15 +11,14 @@ weight: 8
 <script src="{{< blogdown/postref >}}index.en_files/header-attrs/header-attrs.js"></script>
 
 
-<p>The t-test statistic combines elements from our sample: our sample means, the standard deviations, and the number of observations in each sample.</p>
-<p>In this case the test statistic is the ratio of the difference in our sample means to the square root of the sum of the standard deviations for each sample.</p>
+<p>The t-test statistic combines elements from our sample: our sample means (<span class="math inline">\(\hat{\mu}_m\)</span>, <span class="math inline">\(\hat{\mu}_f\)</span>), the standard deviations, and the number of observations in each sample.</p>
+<p>In this case the test statistic is the difference in our sample means divided by the pooled standard deviation.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
 <p><span class="math display">\[
-t = \frac{\hat{\mu}_m - \hat{\mu}_f}{\sqrt{\frac{\hat{\sigma}^2}{n_m}+ \frac{\hat{\sigma}^2}{n_f}}}
+t = \frac{\hat{\mu}_m - \hat{\mu}_f}{\sqrt{\frac{(n_m - 1)\hat{\sigma}_m^2 + (n_f -1)\hat{\sigma}^2_f}{n_m+n_f-2}}}
 \]</span></p>
-<p>There are other variations to this t-test<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>This particular t-test takes as given that the variance in decisions are the same for males and females. We have evidence to support this in this case (<span class="math inline">\(p\)</span>- value of an F-test 0.9653524). <a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p>There are other variations to this t-test statistic. This particular variant is appropriate when the variance of the decision times are the same for males and females. We have evidence to support the assumption of equal variance this in this case (An F-test for equality of variances results in a <span class="math inline">\(p\)</span>-value of 0.9653524 - we fail to reject a null of <em>equal variance</em>).<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>

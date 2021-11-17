@@ -1,0 +1,55 @@
+---
+title: t-test 4
+author: ''
+date: '2021-11-17'
+slug: []
+categories: []
+tags: []
+weight: 9
+---
+
+```{r, echo = FALSE, include= FALSE}
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE)
+library(haven)
+library(here)
+library(knitr)
+library(kableExtra)
+
+library(tidyverse)
+```
+
+```{r, echo = F}
+RTPWA<-read_dta(here("content/basics/Data/Replication_WebAppendix.dta"))
+SampleDat<-RTPWA%>%select(female, TimeNTP)%>%
+              mutate(female = as_factor(female))
+
+SampleDat2<-RTPWA%>%select(female, TimeTP)%>%
+              mutate(female = as_factor(female))
+
+
+# t.test(SampleDat[SampleDat$female==0,]$TimeNTP, SampleDat[SampleDat$female==1,]$TimeNTP)
+
+v.testTP<-var.test(SampleDat2[SampleDat2$female==0,]$TimeTP, SampleDat2[SampleDat2$female==1,]$TimeTP)
+
+t.testTP<-t.test(SampleDat2[SampleDat2$female==0,]$TimeTP, SampleDat2[SampleDat2$female==1,]$TimeTP, 
+                 var.equal = TRUE)
+```
+
+## What is the t-test doing? 
+
+The t-test is based on the notion that we have a *sample* from a *population*. 
+
+- the size of that sample in our case is $n = n_m + n_f$
+- The t-test statistic takes our sample data and provides us with a number.
+$$
+t = \frac{\hat{\mu}_m - \hat{\mu}_f}{\sqrt{\frac{(n_m - 1)\hat{\sigma}_m^2 + (n_f -1)\hat{\sigma}^2_f}{n_m+n_f-2}}} = `r t.testTP$statistic`
+$$
+
+- If we were to take *another* sample of the *same size* ($n$) from that same population, and calculate the t-statistic for that new sample, we would get a *different* number for $t$.
+
+
+
+
+
+
+

@@ -8,14 +8,6 @@ tags: []
 weight: 8
 ---
 
-The t-test statistic combines elements from our sample: our sample means ($\hat{\mu}_m$, $\hat{\mu}_f$), the standard deviations, and the number of observations in each sample. 
-
-In this case the test statistic is the ratio of the difference in our sample means to the square root of the sum of the standard deviations for each sample.
-
-$$
-t = \frac{\hat{\mu}_m - \hat{\mu}_f}{\sqrt{\frac{(n_m - 1)\hat{\sigma}_m^2 + (n_f -1)\hat{\sigma}^2_f}{n_m+n_f-2}}}
-$$
-
 ```{r, echo = FALSE, include= FALSE}
 knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE)
 library(haven)
@@ -43,5 +35,15 @@ t.testTP<-t.test(SampleDat2[SampleDat2$female==0,]$TimeTP, SampleDat2[SampleDat2
                  var.equal = TRUE)
 ```
 
+The t-test statistic combines elements from our sample: our sample means ($\hat{\mu}_m$, $\hat{\mu}_f$), the standard deviations, and the number of observations in each sample. 
 
-There are other variations to this t-test^[This particular t-test takes as given that the variance in decisions are the same for males and females. We have evidence to support the assumption of equal variance this in this case ($p$- value of an F-test `r v.testTP$p.value`). ]. 
+In this case the test statistic is the difference in our sample means divided by the pooled standard deviation.^[There are other variations to this t-test statistic. This particular variant is appropriate when the variance of the decision times are the same for males and females. We have evidence to support the assumption of equal variance this in this case (An F-test for equality of variances results in a $p$-value of `r v.testTP$p.value` - we fail to reject a null of *equal variance*).].
+
+$$
+t = \frac{\hat{\mu}_m - \hat{\mu}_f}{\sqrt{\frac{(n_m - 1)\hat{\sigma}_m^2 + (n_f -1)\hat{\sigma}^2_f}{n_m+n_f-2}}}
+$$
+
+
+
+
+ 

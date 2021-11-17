@@ -38,7 +38,7 @@ ggplot(data = SampleDat2, aes(TimeTP,group = female,fill = female))+
           xlab("Seconds to Decide")+
           #coord_cartesian(xlim = c(min(data$TimeTP, data$TimeNTP), max(data$TimeTP, data$TimeNTP)))+
           theme_bw()+
-          ggtitle("Decision Times: No Time Pressure")
+          ggtitle("Decision Times: With Time Pressure")
 ```
 
 If we look at the average decision times for males and females, we get and idea of the central tendency.

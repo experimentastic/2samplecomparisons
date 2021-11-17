@@ -1,0 +1,25 @@
+---
+title: t-test 4
+author: ''
+date: '2021-11-17'
+slug: []
+categories: []
+tags: []
+weight: 9
+---
+
+<script src="{{< blogdown/postref >}}index.en_files/header-attrs/header-attrs.js"></script>
+
+
+<div id="what-is-the-t-test-doing" class="section level2">
+<h2>What is the t-test doing?</h2>
+<p>The t-test is based on the notion that we have a <em>sample</em> from a <em>population</em>.</p>
+<ul>
+<li><p>the size of that sample in our case is <span class="math inline">\(n = n_m + n_f\)</span></p></li>
+<li><p>The t-test statistic takes our sample data and provides us with a number.
+<span class="math display">\[
+t = \frac{\hat{\mu}_m - \hat{\mu}_f}{\sqrt{\frac{(n_m - 1)\hat{\sigma}_m^2 + (n_f -1)\hat{\sigma}^2_f}{n_m+n_f-2}}} = 1.1454211
+\]</span></p></li>
+<li><p>If we were to take <em>another</em> sample of the <em>same size</em> (<span class="math inline">\(n\)</span>) from that same population, and calculate the t-statistic for that new sample, we would get a <em>different</em> number for <span class="math inline">\(t\)</span>.</p></li>
+</ul>
+</div>

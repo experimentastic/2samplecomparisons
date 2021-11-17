@@ -1,0 +1,54 @@
+---
+title: t-test 5
+author: ''
+date: '2021-11-17'
+slug: []
+categories: []
+tags: []
+weight: 10
+---
+
+<script src="{{< blogdown/postref >}}index.en_files/header-attrs/header-attrs.js"></script>
+
+
+<div id="the-t-distribution" class="section level2">
+<h2>The t-distribution</h2>
+<p>Now suppose we take a <em>huge</em> number of samples (all with the same size (<span class="math inline">\(n\)</span>)), and calculate the t-test statistic for each one of those samples.</p>
+<p>The distribution of that huge number of t-statistics would follow the <strong>t-distribution</strong>.</p>
+<ul>
+<li>The t-distribution is sensitive to the size of our samples (<span class="math inline">\(n\)</span>)</li>
+<li>As our sample size (<span class="math inline">\(n\)</span>) gets closer to the population size (<span class="math inline">\(N\)</span>), the t-distribution gets closer to the <strong>standard normal distribution</strong><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a><br />
+</li>
+<li>As our sample size (<span class="math inline">\(n\)</span>) gets smaller, the tails of the t-distribution get <em>fatter</em></li>
+</ul>
+<p>So, the t-distribution for our test statistic <em>depends on the size of our sample</em>. This is referred to as the <em>degrees of freedom</em>.</p>
+<p>We can see that the degrees of freedom have a more pronounced impact on the t-distribution when the sample size is smaller:</p>
+<iframe src="dffig.html" width="100%" height="700px" marginheight="0" frameborder="0" border="0" scrolling="auto" onload="autoResize(this);">
+</iframe>
+</div>
+<div id="decision-times-with-time-pressure" class="section level2">
+<h2>Decision times with time pressure</h2>
+<ul>
+<li><p>For the particular variant of the t-test statistic in this example (equal variances) the t-test has <span class="math inline">\(n-2\)</span> degrees of freedom</p></li>
+<li><p>We have 379 observations in our sample (<span class="math inline">\(n\)</span>).</p></li>
+<li><p>So the <em>degrees of freedom</em> of the t-distribution for our test statistics is <span class="math inline">\(n-2 = 377\)</span></p></li>
+</ul>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-3"></span>
+<img src="{{< blogdown/postref >}}index.en_files/figure-html/unnamed-chunk-3-1.png" alt="Distribution of t-test statistics if were were to repeatedly sample $n$ observations from the population of decision times with time pressure a large number of times." width="30%" />
+<p class="caption">
+Figure 1: Distribution of t-test statistics if were were to repeatedly sample <span class="math inline">\(n\)</span> observations from the population of decision times with time pressure a large number of times.
+</p>
+</div>
+<!-- # htmltools::tags$iframe( -->
+<!-- #   src = "/static/plotlyplots/dffig.html", -->
+<!-- #   scrolling = "no", -->
+<!-- #   seamless = "seamless", -->
+<!-- #   frameBorder = "0" -->
+<!-- # ) -->
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p><a href="https://en.wikipedia.org/wiki/Normal_distribution" class="uri">https://en.wikipedia.org/wiki/Normal_distribution</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>

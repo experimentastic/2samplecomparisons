@@ -1,0 +1,122 @@
+---
+title: t-test 5
+author: ''
+date: '2021-11-17'
+slug: []
+categories: []
+tags: []
+weight: 10
+---
+
+```{r, echo = FALSE, include= FALSE}
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE)
+library(haven)
+library(here)
+library(knitr)
+library(kableExtra)
+
+library(tidyverse)
+library(plotly)
+library(htmlwidgets)
+```
+
+```{r, echo = F}
+RTPWA<-read_dta(here("content/basics/Data/Replication_WebAppendix.dta"))
+SampleDat<-RTPWA%>%select(female, TimeNTP)%>%
+              mutate(female = as_factor(female))
+
+SampleDat2<-RTPWA%>%select(female, TimeTP)%>%
+              mutate(female = as_factor(female))
+
+
+# t.test(SampleDat[SampleDat$female==0,]$TimeNTP, SampleDat[SampleDat$female==1,]$TimeNTP)
+
+v.testTP<-var.test(SampleDat2[SampleDat2$female==0,]$TimeTP, SampleDat2[SampleDat2$female==1,]$TimeTP)
+
+t.testTP<-t.test(SampleDat2[SampleDat2$female==0,]$TimeTP, SampleDat2[SampleDat2$female==1,]$TimeTP, 
+                 var.equal = TRUE)
+```
+
+## The t-distribution
+
+
+Now suppose we take a *huge* number of samples (all with the same size ($n$)), and calculate the t-test statistic for each one of those samples. 
+
+The distribution of that huge number of t-statistics would follow the **t-distribution**.
+
+- The t-distribution is sensitive to the size of our samples ($n$)
+- As our sample size ($n$) gets closer to the population size ($N$), the t-distribution gets closer to the **standard normal distribution**^[https://en.wikipedia.org/wiki/Normal_distribution]  
+- As our sample size ($n$) gets smaller, the tails of the t-distribution get *fatter*
+
+So, the t-distribution for our test statistic *depends on the size of our sample*. This  is referred to as the *degrees of freedom*. 
+
+We can see that the degrees of freedom have a more pronounced impact on the t-distribution when the sample size is smaller: 
+
+
+<iframe src ="dffig.html" width="100%" height="700px" marginheight="0" frameborder="0" border="0" scrolling="auto" onload="autoResize(this);"></iframe>
+
+
+## Decision times with time pressure
+
+- For the particular variant of the t-test statistic in this example (equal variances) the t-test has $n-2$ degrees of freedom
+
+- We have `r length(SampleDat2$TimeTP)` observations in our sample ($n$).
+- So the *degrees of freedom* of the t-distribution for our test statistics is $n-2 = `r t.testTP$parameter`$
+
+```{r, fig.cap="Distribution of t-test statistics if were were to repeatedly sample $n$ observations from the population of decision times with time pressure a large number of times.", out.width="30%"}
+
+zstart <--5
+zend <- 5
+my_col <- "#00998a"
+
+df1 = t.testTP$parameter
+
+
+xp<- seq(zstart,zend, by = 0.01)
+df<- data.frame(x = xp, y = dt(xp, df = df1))
+
+# shade_curve <- function(MyDF, zstart, zend, fill = "red", alpha = .5){
+#   geom_area(data = subset(MyDF, xp >= qt(zstart, df1)
+#                                & xp < qt(zend, df1)),
+#             aes(y=y), fill = fill, color = NA, alpha = alpha)
+# }
+
+ggplot(df, aes(x = x, y = y)) + 
+  geom_line() +
+  geom_line(aes(x = x, y = dnorm(x, 0,1)),lty = 3, col = "blue")+
+  geom_vline(xintercept= 0, lty = 3)+
+  #shade_curve(MyDF = df, zstart = 0.025, zend = 0.975, fill = my_col, alpha = .3) +
+  #shade_curve(MyDF = df, zstart = 0, zend = 0.025, fill = "orchid4", alpha = .5) +
+  #shade_curve(MyDF = df, zstart = 0.975, zend = 1, fill = "orchid4", alpha = .5) +
+  #scale_x_continuous(breaks = c(qt(0.025, df = df1), 0,qt(0.975, df = df1))) +
+  scale_y_continuous(breaks = NULL) +
+  theme_classic() +
+  ylab("") + xlab("t")+
+  #geom_vline(xintercept = -39.493, lty = 3, col = "red")+
+  # annotate("text", x = 0.75, y = 0.1, label = "0.475", col = my_col)+
+  # annotate("text", x = 1.3, y = 0.1, label =  "0.475", col = my_col)+
+  # annotate("text", x = 0.4, y = 0.05, label = "0.025", col = "orchid4")+
+  # annotate("text", x = 1.9, y = 0.05, label = "0.025", col = "orchid4")+
+  ggtitle(paste0("t distribution df = ", df1))#+
+#  geom_vline(xintercept = t.testTP$statistic, col = "red")+
+ # annotate("text", x = 2.1, y = 0.3, label=paste0("t statistic \n t = ", round(t.testTP$statistic,3)), col = "red")
+
+```
+
+
+
+
+
+
+
+
+<!-- # htmltools::tags$iframe( -->
+<!-- #   src = "/static/plotlyplots/dffig.html", -->
+<!-- #   scrolling = "no", -->
+<!-- #   seamless = "seamless", -->
+<!-- #   frameBorder = "0" -->
+<!-- # ) -->
+
+
+
+
