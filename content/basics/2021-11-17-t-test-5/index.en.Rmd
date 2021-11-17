@@ -108,15 +108,3 @@ ggplot(df, aes(x = x, y = y)) +
 
 
 
-
-
-<!-- # htmltools::tags$iframe( -->
-<!-- #   src = "/static/plotlyplots/dffig.html", -->
-<!-- #   scrolling = "no", -->
-<!-- #   seamless = "seamless", -->
-<!-- #   frameBorder = "0" -->
-<!-- # ) -->
-
-
-
-

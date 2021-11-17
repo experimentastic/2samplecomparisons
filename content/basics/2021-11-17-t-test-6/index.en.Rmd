@@ -1,0 +1,66 @@
+---
+title: t-test 6
+author: ''
+date: '2021-11-17'
+slug: []
+categories: []
+tags: []
+weight: 11
+---
+
+Should we reject the null hypothesis that the population average decision times with time pressure are the same for males and females?
+
+The t-test permits us to ask the a specific question: **If the null hypothesis is true, what is the probability of observing a value the same, or more extreme, than the test statistic that we observed in our sample?**
+
+If this probability is *low* we will *reject the null hypothesis*: we will essentially decide that this observed statistic is different enough that we would not attribute this difference to sampling error alone.
+
+Now, because the t-distribution is a probability distribution, the total *area below the t-distribution* is 1.
+
+So we need to decide what *level of significance* we are comfortable with first, and then we can determine the probability that our observed test statistic could be as extreme or more so that what we just observed.
+
+
+
+
+
+For a two-tailed test (i.e. our alternative hypothesis is $\neq$ to some value), the $p$-value of our test statistic is twice the area towards the nearest *tail*.
+
+```{r, echo = FALSE, include= FALSE}
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE)
+library(haven)
+library(here)
+library(knitr)
+library(kableExtra)
+
+library(tidyverse)
+library(plotly)
+library(htmlwidgets)
+```
+
+```{r, echo = F}
+RTPWA<-read_dta(here("content/basics/Data/Replication_WebAppendix.dta"))
+SampleDat<-RTPWA%>%select(female, TimeNTP)%>%
+              mutate(female = as_factor(female))
+
+SampleDat2<-RTPWA%>%select(female, TimeTP)%>%
+              mutate(female = as_factor(female))
+
+
+# t.test(SampleDat[SampleDat$female==0,]$TimeNTP, SampleDat[SampleDat$female==1,]$TimeNTP)
+
+v.testTP<-var.test(SampleDat2[SampleDat2$female==0,]$TimeTP, SampleDat2[SampleDat2$female==1,]$TimeTP)
+
+t.testTP<-t.test(SampleDat2[SampleDat2$female==0,]$TimeTP, SampleDat2[SampleDat2$female==1,]$TimeTP, 
+                 var.equal = TRUE)
+
+# tail area tot he right of t statistic
+1-pt(t.testTP$statistic, df = t.testTP$parameter)
+
+# p-value (2 times the tail area)
+2*(1-pt(t.testTP$statistic, df = t.testTP$parameter))
+
+# confirm
+
+t.testTP
+```
+
+

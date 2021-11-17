@@ -1,0 +1,34 @@
+---
+title: t-test 6
+author: ''
+date: '2021-11-17'
+slug: []
+categories: []
+tags: []
+weight: 11
+---
+
+<script src="{{< blogdown/postref >}}index.en_files/header-attrs/header-attrs.js"></script>
+
+
+<p>Should we reject the null hypothesis that the population average decision times with time pressure are the same for males and females?</p>
+<p>The t-test permits us to ask the a specific question: <strong>If the null hypothesis is true, what is the probability of observing a value the same, or more extreme, than the test statistic that we observed in our sample?</strong></p>
+<p>If this probability is <em>low</em> we will <em>reject the null hypothesis</em>: we will essentially decide that this observed statistic is different enough that we would not attribute this difference to sampling error alone.</p>
+<p>Now, because the t-distribution is a probability distribution, the total <em>area below the t-distribution</em> is 1.</p>
+<p>So we need to decide what <em>level of significance</em> we are comfortable with first, and then we can determine the probability that our observed test statistic could be as extreme or more so that what we just observed.</p>
+<p>The <span class="math inline">\(p\)</span>-value of our test statistic is the area towards the nearest <em>tail</em></p>
+<pre><code>##         t 
+## 0.1263807</code></pre>
+<pre><code>##         t 
+## 0.2527613</code></pre>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  SampleDat2[SampleDat2$female == 0, ]$TimeTP and SampleDat2[SampleDat2$female == 1, ]$TimeTP
+## t = 1.1454, df = 377, p-value = 0.2528
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -2.827096 10.716953
+## sample estimates:
+## mean of x mean of y 
+##  160.6291  156.6842</code></pre>
