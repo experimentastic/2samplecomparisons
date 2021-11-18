@@ -2,7 +2,7 @@
 chapter: true
 pre: <b>1. </b>
 title: Data
-weight: 5
+weight: 1
 ---
 
 ### Part 1

@@ -1,11 +1,11 @@
 ---
-title: t-test 1
+title: The Question
 author: ''
 date: '2021-11-15'
 slug: []
 categories: []
 tags: []
-weight: 6
+weight: 3
 ---
 
 Let's take a closer look at the data collected *with*  time pressure.

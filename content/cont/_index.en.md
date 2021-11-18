@@ -1,11 +1,11 @@
 ---
 chapter: true
-pre: <b>2. </b>
+pre: <b> </b>
 title: Content
 weight: 10
 ---
 
-### Chapter 2
+### Chapter 3
 
 # Content
 
